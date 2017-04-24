@@ -6,6 +6,7 @@ before_install:
 - cp .env.example .env
 install:
 - docker-compose build
+- docker-compose run app npm install
 script:
 - docker-compose run app npm test
 notifications:
