@@ -16,6 +16,7 @@ const agent = request.agent(app);
 const _user = {
   email: 'foo@email.com',
   name: 'Foo bar',
+  group: 'admin',
   username: 'foobar',
   password: 'foobar'
 };
