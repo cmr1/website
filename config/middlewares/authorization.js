@@ -4,6 +4,19 @@
  *  Generic require login routing middleware
  */
 
+exports.requiresAdmin = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    if (req.user.isAdmin()) {
+      return next();
+    } else {
+      return res.redirect('/');
+    }
+  } else {
+    if (req.method == 'GET') req.session.returnTo = req.originalUrl;
+    return res.redirect('/login');
+  }
+}
+
 exports.requiresLogin = function (req, res, next) {
   if (req.isAuthenticated()) return next();
   if (req.method == 'GET') req.session.returnTo = req.originalUrl;

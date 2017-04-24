@@ -138,3 +138,14 @@ button.error:focus {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.footer {
+  text-align: center;
+  opacity: .65;
+  padding: 25px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 10px;
+}

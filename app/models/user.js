@@ -23,6 +23,7 @@ const oAuthTypes = [
 const UserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
+  group: { type: String, default: 'guest' },
   username: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
@@ -110,6 +111,25 @@ UserSchema.pre('save', function (next) {
  */
 
 UserSchema.methods = {
+  isGroup: function(groupName) {
+    return this.group === groupName;
+  },
+
+  isAdmin: function() {
+    return this.isGroup('admin');
+  },
+
+  isClient: function() {
+    return this.isGroup('client');
+  },
+
+  isMember: function() {
+    return this.isGroup('member');
+  },
+
+  isGuest: function() {
+    return this.isGroup('guest');
+  },
 
   /**
    * Authenticate - check if the passwords are the same
@@ -178,7 +198,7 @@ UserSchema.statics = {
    */
 
   load: function (options, cb) {
-    options.select = options.select || 'name username';
+    options.select = options.select || 'name username group';
     return this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);

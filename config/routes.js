@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+
+const admin = require('../app/controllers/admin');
 const users = require('../app/controllers/users');
 const articles = require('../app/controllers/articles');
 const comments = require('../app/controllers/comments');
@@ -27,6 +29,8 @@ const fail = {
 
 module.exports = function (app, passport) {
   const pauth = passport.authenticate.bind(passport);
+
+  app.get('/admin', auth.requiresAdmin, admin.index);
 
   // user routes
   app.get('/login', users.login);
@@ -72,8 +76,8 @@ module.exports = function (app, passport) {
   // article routes
   app.param('id', articles.load);
   app.get('/articles', articles.index);
-  app.get('/articles/new', auth.requiresLogin, articles.new);
-  app.post('/articles', auth.requiresLogin, articles.create);
+  app.get('/articles/new', auth.requiresAdmin, articles.new);
+  app.post('/articles', auth.requiresAdmin, articles.create);
   app.get('/articles/:id', articles.show);
   app.get('/articles/:id/edit', articleAuth, articles.edit);
   app.put('/articles/:id', articleAuth, articles.update);
