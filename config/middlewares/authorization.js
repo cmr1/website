@@ -9,6 +9,7 @@ exports.requiresAdmin = function (req, res, next) {
     if (req.user.isAdmin()) {
       return next();
     } else {
+      req.flash('info', 'You are not authorized');
       return res.redirect('/');
     }
   } else {

@@ -103,19 +103,18 @@ button.error:focus {
 }
 
 .header-main, .header-sub {
-  text-align: right;
   margin: 0;
   padding: 0;
 }
 
 .header-main {
-  font-size: 22px;
+  font-size: 40px;
   font-weight: bold;
   letter-spacing: 5px;
 }
 
 .header-sub {
-  font-size: 12px;
+  font-size: 18px;
   opacity: .5;
 }
 
